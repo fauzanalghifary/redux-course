@@ -19,4 +19,9 @@ console.log(store.getState());
 store.dispatch(addEmployee({ name: "John" }));
 console.log(store.getState());
 
+store.dispatch({
+  type: "SHOW_ERROR",
+  payload: { error: "Something went wrong" },
+});
+
 unsubscribe();
