@@ -1,27 +1,29 @@
 import store from "./store/configureStore";
-// import { addTask, removeTask, completeTask } from "./store/action";
-import { addTask, removeTask, completeTask } from "./store/taskSlice";
-import { addEmployee, removeEmployee } from "./store/employeeSlice";
+import axios from "axios";
+import {
+  getTasks,
+  fetchTasks,
+  loadTaks,
+  addNewTask,
+  updateCompleted,
+  removeTask,
+} from "./store/taskSlice";
+import { apiCallBegan } from "./store/api";
 
-const unsubscribe = store.subscribe(() => {
-  console.log("Store changed!", store.getState());
-});
+// const gettingTasks = async () => {
+//   try {
+//     const response = await axios.get("http://localhost:5000/api/tasks");
+//     store.dispatch(getTasks({ tasks: response.data }));
+//   } catch (error) {
+//     store.dispatch({ type: "SHOW_ERROR", payload: { error: error.message } });
+//   }
+// };
 
-store.dispatch(addTask({ task: "Learn Redux" }));
-console.log(store.getState());
+// gettingTasks();
 
-store.dispatch(completeTask({ id: 1 }));
-console.log(store.getState());
+// store.dispatch(fetchTasks());
 
-store.dispatch(removeTask({ id: 1 }));
-console.log(store.getState());
-
-store.dispatch(addEmployee({ name: "John" }));
-console.log(store.getState());
-
-store.dispatch({
-  type: "SHOW_ERROR",
-  payload: { error: "Something went wrong" },
-});
-
-unsubscribe();
+store.dispatch(loadTaks());
+// store.dispatch(addNewTask({ task: "New Task" }));
+store.dispatch(updateCompleted({ id: 6, completed: true }));
+store.dispatch(removeTask({ id: 6 }));
